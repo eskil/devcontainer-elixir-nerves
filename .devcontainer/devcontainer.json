@@ -1,0 +1,64 @@
+{
+    // The name of the devcontainer, this can be changed, it's only used in the UI
+    // to show the name of the container.
+    "name": "Elixir Nerves",
+
+    // Our project root is /workspaces/project. To change this, change the string in
+    // all filder under .devcontainer
+    "workspaceFolder": "/workspaces/project",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/project,type=bind",
+
+    // Either build a compose...
+    "dockerComposeFile": "./compose.yaml",
+    "service": "dev",
+
+    // Or the dockerfile directly...
+    // "build":{
+    //     "dockerfile": "Dockerfile",
+    //     "context": ".."
+    // },
+    
+    // If the latter, remember to uncomment the sleep-infinity at the end.
+
+    "appPort": [],
+    
+    "mounts": [],
+
+    "containerEnv": {
+        "HOST_USER": "${localEnv:USER}"
+    },
+    
+    "remoteUser": "vscode",
+    
+    "customizations": {
+        "vscode": {
+            "extensions": [ 
+                "editorconfig.editorconfig",
+                "github.vscode-pull-request-github",
+                "jakebecker.elixir-ls",
+                "redhat.vscode-yaml",
+                "vscodevim.vim"
+            ],
+            "settings": {
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                },
+                "files.trimFinalNewlines": true,
+                "files.trimTrailingWhitespace": true,
+                "python.defaultInterpreterPath": ".venv/bin/python",
+                "search.useIgnoreFiles": false,
+                "search.exclude": {
+                },
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "zsh",
+                        "icon": "terminal-linux"
+                    }
+                },
+            }
+        }
+    },
+
+    "postCreateCommand": "cd .devcontainer/tasks && ./post-create"
+}
