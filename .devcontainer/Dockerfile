@@ -23,6 +23,10 @@ RUN apt-get update \
     libmnl-dev libssl-dev libncurses5-dev help2man libconfuse-dev libarchive-dev \
     libwxgtk3.2-dev 
 
+# Extra goodies we need, separate from the nerves parts for caching layers purposes
+RUN apt-get -y install --no-install-recommends \
+    openssh-client command-not-found file
+
 # Clean up
 RUN apt-get autoremove -y \
     && apt-get clean -y \
