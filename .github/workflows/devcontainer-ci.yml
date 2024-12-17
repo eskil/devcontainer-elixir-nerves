@@ -1,0 +1,42 @@
+---
+name: Lint/Scan
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: lint code
+        uses: github/super-linter@v5.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_GITHUB_ACTIONS: false
+
+#  scan:
+#    needs: lint
+#    name: scan dockerfile
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: build container image
+#        run: docker build . --file .devcontainer/Dockerfile --tag localbuild/testimage:latest
+#
+#      - name: run local anchore scan
+#        uses: anchore/scan-action@v3.2.5
+#        id: scan
+#        with:
+#          image: "localbuild/testimage:latest"
+#          acs-report-enable: true
+#          fail-build: false
+#
+#      - name: upload anchore scan report
+#        uses: github/codeql-action/upload-sarif@v1
+#        with:
+#          sarif_file: ${{ steps.scan.outputs.sarif }}
