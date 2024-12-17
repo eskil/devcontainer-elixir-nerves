@@ -78,9 +78,8 @@ RUN git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git
 
 # Ensure latest versions of Hex/Rebar are installed on build
 RUN ASDF_DIR=~/.asdf . ~/.asdf/asdf.sh \
-    && mix local.hex \
-    && mix local.rebar \
-    && mix archive.install hex nerves_bootstrap
+    && mix do local.hex --force, local.rebar --force \
+    && mix do archive.install hex nerves_bootstrap --force
 
 # Keep container running
 # We don't use this if we use the compose in devcontainer, since the

@@ -24,13 +24,12 @@ cat >> ~/.zshrc <<EOF
 	|| source /workspaces/project/.devcontainer/config/.p10k.zsh
 
 HISTFILE=/command-history/.zsh-history
-EOF
 
-############
 # Setup ASDF
-cat >> ~/.zshrc <<EOF
-
 . ~/.asdf/asdf.sh
+
+# Set our nerves target
+export MIX_TARGET=rpi0
 EOF
 
 if [[ -f ~/.gitconfig.host ]]; then

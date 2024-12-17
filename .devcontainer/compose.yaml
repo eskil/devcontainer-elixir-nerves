@@ -10,15 +10,18 @@ services:
     # need a sleep-infinity
     stdin_open: true
     tty: true
-    volumes:
-      # Mount our root (/workspaces/project)
-      - type: bind
-        source: ..
-        target: /workspaces/project
-      # Mount our command history
-      - type: volume
-        source: command-history
-        target: /command-history
+    # We don't use volumes here, we handled that come devcontainer.json's mounts.
+    # But these are the two basic mounts, in case you want to use docker compose
+    # directly.
+    # volumes:
+    #   # Mount our root (/workspaces/project)
+    #   - type: bind
+    #     source: ..
+    #     target: /workspaces/project
+    #   # Mount our command history
+    #   - type: volume
+    #     source: command-history
+    #     target: /command-history
 
   # You can add other services here as needed
   # postgres:

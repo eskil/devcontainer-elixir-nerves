@@ -4,9 +4,8 @@
     "name": "Elixir Nerves",
 
     // Our project root is /workspaces/project. To change this, change the string in
-    // all filder under .devcontainer
+    // all files under .devcontainer
     "workspaceFolder": "/workspaces/project",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/project,type=bind",
 
     // Either build a compose...
     "dockerComposeFile": "./compose.yaml",
@@ -17,12 +16,16 @@
     //     "dockerfile": "Dockerfile",
     //     "context": ".."
     // },
-    
-    // If the latter, remember to uncomment the sleep-infinity at the end.
+    // If you use the latter, remember to uncomment the sleep-infinity at the end.
 
+    // Ports to forward
     "appPort": [],
-    
-    "mounts": [],
+
+    // 
+    "mounts": [
+        "type=bind,source=${localWorkspaceFolder},target=/workspaces/project,readonly",
+        "type=volume,source=command-history,target=/command-history"
+    ],
 
     "containerEnv": {
         "HOST_USER": "${localEnv:USER}"
@@ -45,6 +48,9 @@
                 },
                 "files.trimFinalNewlines": true,
                 "files.trimTrailingWhitespace": true,
+                "files.exclude": {
+                    "**/*~": true
+                },
                 "python.defaultInterpreterPath": ".venv/bin/python",
                 "search.useIgnoreFiles": false,
                 "search.exclude": {
