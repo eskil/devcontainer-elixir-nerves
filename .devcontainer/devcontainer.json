@@ -66,5 +66,7 @@
         }
     },
 
+    // The post-create script sets up things after the dockerfile, such as
+    // zsh config etc.
     "postCreateCommand": "cd .devcontainer/tasks && ./post-create"
 }
