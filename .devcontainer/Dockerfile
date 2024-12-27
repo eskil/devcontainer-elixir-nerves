@@ -58,7 +58,7 @@ USER ${USERNAME}
 # From https://hexdocs.pm/nerves/installation.html#linux
 # and https://asdf-vm.com/guide/getting-started.html
 # asdf and fwup/erlang/ etc instructions per nerves project
-RUN cd ~ && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.1
+RUN cd ~ && git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0
 
 # From https://hexdocs.pm/nerves/installation.html#linux
 RUN ASDF_DIR=~/.asdf . ~/.asdf/asdf.sh \

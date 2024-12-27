@@ -21,18 +21,20 @@ Use with the VSCode **Remote - Containers** extension.
 
 ### Does not...
 
-It installs;
-* [fwup](https://github.com/fwup-home/fwup)
+While the docker image installs
+[fwup](https://github.com/fwup-home/fwup), docker cannot
+access usb devices,
 
-But since docker (MacOS) cannot access usb devices, you cannot burn
-firmware from within the devcontainer. You need to build `fwup`
-locally and do the burns locally.
-
-See also
 * [This elixir post discussion](https://elixirforum.com/t/nerves-development-environment-with-docker-and-vs-code/35973) reg. nerves devcontainer
 *
   [Docker FAQ](https://docs.docker.com/desktop/troubleshoot-and-support/faqs/general/#can-i-pass-through-a-usb-device-to-a-container)
 
+So you cannot burn firmware from within the devcontainer. You need to
+install `fwup` locally and do the burns locally.
+
+```
+brew install fwup
+```
 
 ### Get started
 
@@ -46,6 +48,15 @@ You'll need a ssh key in `~/.ssh` that matches what's in `config/target.exs`;
 Path.join(".ssh/id_{rsa,ecdsa,ed25519}.pub")
 ```
 
-This is not created as part of the image.
+This is not created as part of the image. See also [nerves ssh key setup](https://hexdocs.pm/nerves_firmware_ssh/readme.html#device-keys).
+I often create a separate key per project
 
-See also [nerves ssh key setup](https://hexdocs.pm/nerves_firmware_ssh/readme.html#device-keys)
+```
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/hello_nerves.id_rsa -C "user@email.tld"
+```
+
+and then modify `config/target.exs`
+```
+- Path.join(".ssh/id_{rsa,ecdsa,ed25519}.pub")
++ Path.join(".ssh/hello_nerves.id_{rsa,ecdsa,ed25519}.pub")
+```

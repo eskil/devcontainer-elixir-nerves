@@ -15,7 +15,7 @@ fi
 EOF
 
 sed -Ei 's|^ZSH_THEME="\w+"|ZSH_THEME="powerlevel10k/powerlevel10k"|' ~/.zshrc
-sed -Ei 's|plugins=\(git\)|plugins=(git zsh-autosuggestions zsh-syntax-highlighting)|' ~/.zshrc
+sed -Ei 's|plugins=\(git\)|plugins=(git zsh-autosuggestions zsh-syntax-highlighting asdf)|' ~/.zshrc
 
 cat >> ~/.zshrc <<EOF
 
@@ -29,7 +29,7 @@ HISTFILE=/command-history/.zsh-history
 . ~/.asdf/asdf.sh
 
 # Set our nerves target
-export MIX_TARGET=rpi0
+export MIX_TARGET=rpi3a
 EOF
 
 if [[ -f ~/.gitconfig.host ]]; then
